@@ -8,3 +8,4 @@ PivotData refers to the following products that share common js front-end widget
 Default implementation of *jquery.nrecoPivotChart.js* from [web pivot table builder](https://www.nrecosite.com/pivotdata/web-pivot-builder.aspx) uses [ChartistJS](https://github.com/gionkunz/chartist-js) that is free lighweight charting library with SVG rendering, but in some cases you might want to use more powerful interactive charts. The following alternative integrations are available:
 
 * [ECharts](https://github.com/nreco/pivotdata/tree/master/webpivot/ECharts)
+* [C3.js](https://github.com/nreco/pivotdata/tree/master/webpivot/C3js)
