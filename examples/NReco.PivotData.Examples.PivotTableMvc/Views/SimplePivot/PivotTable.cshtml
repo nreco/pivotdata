@@ -1,0 +1,35 @@
+﻿@model NReco.PivotData.PivotTable
+
+<table class="table table-condensed table-bordered">
+
+	<tr>
+		<th></th>
+		@foreach (var colKey in Model.ColumnKeys) {
+			<th>@colKey.ToString()</th>
+		}
+		<th class="totals" rowspan="@Model.Columns.Length">Totals</th>
+	</tr>
+
+	
+	@for (var r=0; r<Model.RowKeys.Length; r++) { var rowKey = Model.RowKeys[r];
+	<tr>
+		<th>@rowKey.ToString()</th>
+
+
+		@for (var c=0; c<Model.ColumnKeys.Length; c++) {
+			<td>@Model[r,c].Value</td>
+		}
+
+		<td class="totalValue">@Model[r,null].Value</td>
+	</tr>
+	}
+
+	<tr>
+		<th class="totals" colspan="@Model.Rows.Length">Totals</th>
+		@for (var c = 0; c < Model.ColumnKeys.Length; c++) {
+			<td class="totalValue">@Model[null, c].Value</td>
+		}
+		<td class="totalValue">@Model[null,null].Value</td>
+	</tr>
+
+</table>

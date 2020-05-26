@@ -1,0 +1,42 @@
+IT IS NECESSARY FOR YOU TO AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE BEFORE YOU ARE PERMITTED TO CONTINUE TO USE THE SOFTWARE FROM THIS PACKAGE AND ITS SOURCE CODE. BY INSTALLING, COPYING, OR OTHERWISE USING THE SOFTWARE, YOU AGREE TO BE BOUND BY THE TERMS OF THIS LICENSE INCLUDING THE WARRANTY DISCLAIMERS, LIMITATIONS ON LIABILITY AND TERMINATION PROVISIONS.
+
+If you do not agree to the terms of this LICENSE you must ENTIRELY remove this package and all its copies, unpacked or copied. 
+
+I.  OWNERSHIP; LICENSE GRANT.
+
+This is a license agreement and NOT an agreement for sale. Vitaliy Fedorchenko continues to own the copy of the NReco.PivotData library (SOFTWARE) contained in this package and all copies thereof.  Your rights to the SOFTWARE are specified in this LICENSE, and Vitaliy Fedorchenko retains all rights not expressly granted to you in this LICENSE.  Vitaliy Fedorchenko hereby grants to you, and you accept, a non-exclusive, non-transferable license to use, copy and modify the SOFTWARE only as authorized below.
+
+II.  PERMITTED USES.
+
+This FREE LICENSE grants you the following rights:
+
+A. You may use the SOFTWARE only in non-SaaS apps that have one single-server production deployment. These restrictions may be removed with a commercial license.
+
+B. Development environments: you may make copies on more than one computer, as long as the use of the SOFTWARE is by the same company developers or individual developer.
+
+
+III.  PROHIBITED USES.
+
+You may NOT, without the prior written permission of Vitaliy Fedorchenko:
+
+A. Use, copy, modify, or merge copies of the SOFTWARE and any accompanying documents except as permitted in this LICENSE.
+
+B. Transfer, rent, lease, or sublicense the SOFTWARE in either binary or source code form.
+
+C. Distribute the SOFTWARE as part of your own project/product. 
+
+D. Integrate and use the SOFTWARE with your SaaS (Software as a Service) product.
+
+
+V.  COPYRIGHT.
+
+All title and copyrights in and to the SOFTWARE (including but not limited to any images, photographs, animation, video, audio, music, text and "applets" incorporated into the SOFTWARE) and the accompanying printed materials are owned by Vitaliy Fedorchenko or its suppliers.  The SOFTWARE is protected by United States copyright laws and international treaty provisions. All rights are reserved worldwide.  You must treat the SOFTWARE like any other copyrighted material, except that you may, in addition to the copies permitted in this LICENSE, make one copy of the SOFTWARE solely for backup or archival purposes. No part of the accompanying printed materials may be reproduced, transmitted, transcribed, stored in any retrieval system, or translated into any language by any means without the express prior written permission of Vitaliy Fedorchenko.
+
+VI.  TERMINATION.
+
+This LICENSE and your right to use the SOFTWARE will terminate immediately without notice from Vitaliy Fedorchenko if you fail to comply with the terms and conditions of this LICENSE.  Upon termination, you agree to destroy the SOFTWARE, including all accompanying documents and copies. 
+
+
+VII. WARRANTY.
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. Vitaliy Fedorchenko does not warranty that the SOFTWARE will be error-free. SOURCE CODE IS LICENSED “AS IS”. According to this FREE LICENSE, Vitaliy Fedorchenko DOES NOT PROVIDE ANY TECHNICAL SUPPORT FOR THE SOFTWARE.

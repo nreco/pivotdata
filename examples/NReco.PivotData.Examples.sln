@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NReco.PivotData", "..\src\NReco.PivotData\NReco.PivotData.csproj", "{2DD34426-09BF-4F6B-8037-38786B032DAA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReco.PivotData.Examples.ParallelCube", "NReco.PivotData.Examples.ParallelCube\NReco.PivotData.Examples.ParallelCube.csproj", "{E0991255-BC48-43FE-B27C-FF3A0B455C3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReco.PivotData.Examples.PivotTableMvc", "NReco.PivotData.Examples.PivotTableMvc\NReco.PivotData.Examples.PivotTableMvc.csproj", "{51EC4EEF-14D3-4017-B54A-A9839792159E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReco.PivotData.Examples.CsvDemo", "NReco.PivotData.Examples.CsvDemo\NReco.PivotData.Examples.CsvDemo.csproj", "{316A77EB-E91A-4B7A-B02B-3718D74C4F82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReco.PivotData.Examples.QueryCube", "NReco.PivotData.Examples.QueryCube\NReco.PivotData.Examples.QueryCube.csproj", "{E9F0D582-C74B-4461-BB8A-F7601DED1645}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReco.PivotData.Examples.ExcelPivotTable", "NReco.PivotData.Examples.ExcelPivotTable\NReco.PivotData.Examples.ExcelPivotTable.csproj", "{F3377E20-C353-40DC-8B1D-9233DA6CD114}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReco.PivotData.Examples.DynamicListGrouping", "NReco.PivotData.Examples.DynamicListGrouping\NReco.PivotData.Examples.DynamicListGrouping.csproj", "{40425A51-AF89-43B8-8B4D-10FDF2432374}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NReco.PivotData.Examples.DynamicFormulaMeasure", "NReco.PivotData.Examples.DynamicFormulaMeasure\NReco.PivotData.Examples.DynamicFormulaMeasure.csproj", "{A6F003FA-D767-40FD-AEC3-4B5B50367321}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2DD34426-09BF-4F6B-8037-38786B032DAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DD34426-09BF-4F6B-8037-38786B032DAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DD34426-09BF-4F6B-8037-38786B032DAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DD34426-09BF-4F6B-8037-38786B032DAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0991255-BC48-43FE-B27C-FF3A0B455C3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0991255-BC48-43FE-B27C-FF3A0B455C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0991255-BC48-43FE-B27C-FF3A0B455C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0991255-BC48-43FE-B27C-FF3A0B455C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51EC4EEF-14D3-4017-B54A-A9839792159E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EC4EEF-14D3-4017-B54A-A9839792159E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EC4EEF-14D3-4017-B54A-A9839792159E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EC4EEF-14D3-4017-B54A-A9839792159E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{316A77EB-E91A-4B7A-B02B-3718D74C4F82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{316A77EB-E91A-4B7A-B02B-3718D74C4F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{316A77EB-E91A-4B7A-B02B-3718D74C4F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{316A77EB-E91A-4B7A-B02B-3718D74C4F82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9F0D582-C74B-4461-BB8A-F7601DED1645}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9F0D582-C74B-4461-BB8A-F7601DED1645}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9F0D582-C74B-4461-BB8A-F7601DED1645}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9F0D582-C74B-4461-BB8A-F7601DED1645}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3377E20-C353-40DC-8B1D-9233DA6CD114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3377E20-C353-40DC-8B1D-9233DA6CD114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3377E20-C353-40DC-8B1D-9233DA6CD114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3377E20-C353-40DC-8B1D-9233DA6CD114}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40425A51-AF89-43B8-8B4D-10FDF2432374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40425A51-AF89-43B8-8B4D-10FDF2432374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40425A51-AF89-43B8-8B4D-10FDF2432374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40425A51-AF89-43B8-8B4D-10FDF2432374}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6F003FA-D767-40FD-AEC3-4B5B50367321}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F003FA-D767-40FD-AEC3-4B5B50367321}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F003FA-D767-40FD-AEC3-4B5B50367321}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F003FA-D767-40FD-AEC3-4B5B50367321}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC926CBE-BFD2-4D30-B830-660FEA3A1A91}
+	EndGlobalSection
+EndGlobal

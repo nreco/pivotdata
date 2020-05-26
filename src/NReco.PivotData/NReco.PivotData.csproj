@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>PivotData OLAP library: in-memory multidimensional dataset for data aggregation, roll-up, slice and dice, pivot table data calculation.</Description>
+    <Copyright>Copyright (c) 2015-2020 Vitalii Fedorchenko</Copyright>
+    <AssemblyTitle>NReco.PivotData</AssemblyTitle>
+    <VersionPrefix>1.3.8</VersionPrefix>
+    <Authors>Vitalii Fedorchenko</Authors>
+    <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyName>NReco.PivotData</AssemblyName>
+    <AssemblyOriginatorKeyFile>NReco.PivotData.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>false</SignAssembly>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
+    <PackageId>NReco.PivotData</PackageId>
+    <PackageTags>Pivot;Table;PivotTable;OLAP;Cube;Crosstab;Matrix;Multidimensional;Slice;Dice;Aggregation;dynamic-grouping;netstandard;netcore;net45</PackageTags>
+    <PackageIconUrl>https://www.nrecosite.com/img/nreco-logo-200.png</PackageIconUrl>
+    <PackageProjectUrl>https://www.nrecosite.com/pivot_data_library_net.aspx</PackageProjectUrl>
+    <PackageLicenseUrl>https://www.nrecosite.com/pivot_data_library_net.aspx</PackageLicenseUrl>
+	<PackageReleaseNotes>Online demo, usage examples: https://www.nrecosite.com/pivot_data_library_net.aspx
+Get started: https://www.nrecosite.com/pivotdata/cube-basics.aspx
+
+v.1.3.8 changes:
+- removed builds legacy targets
+- PivotTable class: fixed issue with sort-by-value for single-measure that is FormulaAggregator
+- PivotTable class: fixed issue with sort-by-value when aggregator value is IList (ListAggregator, ListUniqueAggregator)
+- PivotTable class: added ability to set custom IComparer for values (ValuesComparer property)
+
+v.1.3.7 changes:
+- fixed PivotDataState serialization issue with Key.Empty
+- PivotData class: XOR-based hash function for keys replaced with sum-based to avoid collisions
+- performance optimization: less array allocations in PivotData.ProcessData method and PivotTable class
+
+v.1.3.6 changes:
+- added ModeAggregator (calculates value that appears most often)
+- fixed issue with slow sub-totals calculation in some cases
+- always use InvariantCulture for numbers parsing
+
+v.1.3.5 changes:
+- added QuantileAggregator to calculate specified quantile (median)
+- added PivotData.LazyAdd property (affects behaviour when non-existing key is accessed)
+- added netstandard2.0 build
+- efficient sub-totals calculation in PivotTable class (especially for large pivot tables)
+- now PivotData class correctly loads PivotDataState which has duplicate key entries
+</PackageReleaseNotes>
+    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="System.Data" />
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <DefineConstants>$(DefineConstants);NET_STANDARD2</DefineConstants>
+  </PropertyGroup> 
+
+</Project>

@@ -1,0 +1,30 @@
+﻿@model System.Collections.IDictionary
+	
+	<!-- simple pivot table styling -->
+	<style>
+		table th.totals {
+			font-style:italic;
+			text-align:right;
+			vertical-align:bottom !important;
+		}
+	</style>
+
+<h1>
+	Simple pivot table &amp; chart demo <small>rendered with custom code by PivotTable model</small>
+</h1>
+
+<hr />
+
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Simple Pivot Table</h3>
+
+			@{Html.RenderAction("PivotTable", "SimplePivot");}
+
+		</div>
+		<div class="col-md-6">
+			<h3>Google Charts</h3>
+
+			@{Html.RenderAction("GoogleChart", "SimplePivot");}
+		</div>
+	</div>	

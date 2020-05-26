@@ -1,0 +1,11 @@
+App_Data/
+packages/
+bin/
+obj/
+generated/
+*.user
+*.suo
+.vs
+*.lock.json
+*.nuget.targets
+*.bat
