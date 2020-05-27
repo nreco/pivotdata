@@ -19,6 +19,16 @@ Official component page: [PivotData Toolkit for .NET](https://www.nrecosite.com/
 * [Create Excel PivotTable](https://www.nrecosite.com/pivotdata/create-excel-pivot-table.aspx)
 * [API Reference](https://www.nrecosite.com/doc/NReco.PivotData/)
 
+# Examples
+
+* [CsvDemo](https://github.com/nreco/pivotdata/tree/master/examples/NReco.PivotData.Examples.CsvDemo): how to aggregate data from CSV file
+* [DynamicFormulaMeasure](https://github.com/nreco/pivotdata/tree/master/examples/NReco.PivotData.Examples.DynamicFormulaMeasure): how to define formula-based measure dynamically (with a user-entered string expression)
+* [DynamicListGrouping](https://github.com/nreco/pivotdata/tree/master/examples/NReco.PivotData.Examples.DynamicListGrouping): group objects by multiple fields and calculate aggregates
+* [ExcelPivotTable](https://github.com/nreco/pivotdata/tree/master/examples/NReco.PivotData.Examples.ExcelPivotTable): generates Excel PivotTable by PivotData's PivotTable
+* [ParallelCube](https://github.com/nreco/pivotdata/tree/master/examples/NReco.PivotData.Examples.ParallelCube): how to perform parallel aggregation (use all CPU cores) and merge all results into one resulting cube
+* [PivotTableMvc](https://github.com/nreco/pivotdata/tree/master/examples/NReco.PivotData.Examples.PivotTableMvc): MVC example that renders simple pivot table / charts (without PivotData Toolkit components)
+* [QueryCube](https://github.com/nreco/pivotdata/tree/master/examples/NReco.PivotData.Examples.QueryCube): how to make OLAP queries with SliceQuery class: slice, dice, filter, roll-up, calculate derived dimensions and measures
+
 ## Who is using this?
 NReco.PivotData is in production use at [SeekTable.com](https://www.seektable.com/) and [PivotData microservice](https://www.nrecosite.com/pivotdata_service.aspx). NReco.PivotData is a pre-requisite for PivotData Toolkit components.
 
