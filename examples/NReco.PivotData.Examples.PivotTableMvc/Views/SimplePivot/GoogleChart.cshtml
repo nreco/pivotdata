@@ -2,7 +2,6 @@
 @using NReco.PivotData
 
 @{
-	var json = new System.Web.Script.Serialization.JavaScriptSerializer();
 	var categories = Model.GetDimensionKeys(new[]{"category"})[0];
 	var rounds = Model.GetDimensionKeys(new[] { "round" })[0];	
 }

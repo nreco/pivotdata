@@ -3,21 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Xml;
 using System.IO;
 using System.Net;
 using System.Threading;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web.UI;
 using System.Data;
-
-using System.Web.Security;
+using Microsoft.AspNetCore.Hosting;
 
 using NReco.PivotData;
 
-namespace Controllers {
+namespace NReco.PivotData.Examples.PivotTableMvc {
 	
 	/// <summary>
 	/// Simple pivot table example. 
@@ -26,16 +25,18 @@ namespace Controllers {
 	/// </summary>
 	public class SimplePivotController : Controller {
 
-		public ActionResult Index() {
-			ViewBag.PageAlias = "simple";
-			return View();
+		IWebHostEnvironment HostEnv;
+
+		public SimplePivotController(IWebHostEnvironment hostEnv) {
+			HostEnv = hostEnv;
 		}
 
-		public ActionResult PivotTable() {
+		public ActionResult Index() {
+			ViewBag.PageAlias = "simple";
+
 			var pvtData = GetDataCube();
-			
 			// slice data cube with SliceQuery class
-			var filterByCategories = new [] {"web","software","hardware"};
+			var filterByCategories = new[] { "web", "software", "hardware" };
 			var slicedPvtData = new SliceQuery(pvtData)
 					.Dimension("funded_year_quarter")
 					.Dimension("category")
@@ -43,22 +44,19 @@ namespace Controllers {
 
 			// illustrates how to build classic 2D pivot table
 			var pvtTbl = new PivotTable(
-					new [] {"funded_year_quarter"}, // rows
-					new [] {"category"},
+					new[] { "funded_year_quarter" }, // rows
+					new[] { "category" },
 					slicedPvtData);
-			
-			return PartialView(pvtTbl);
-		}
 
-		public ActionResult GoogleChart() {
-			var pvtData = GetDataCube();
-
-			return PartialView(pvtData);
+			return View(new PivotTableContext() {
+				PivotTableData = pvtTbl,
+				CubeData = pvtData
+			} );
 		}
 
 		public PivotData GetDataCube() {
 			// load serialized cube from sample file (aggregation result of 'TechCrunchcontinentalUSA.csv' from CsvDemo example) 
-			var cubeFile = HttpContext.Server.MapPath("~/App_Data/TechCrunchCube.dat");
+			var cubeFile = Path.Combine(HostEnv.ContentRootPath,"App_Data/TechCrunchCube.dat");
 			
 			// configuration of the serialized cube
 			var pvtData = new PivotData(new[]{"company","category","fundedDate","funded_year_quarter","round"},

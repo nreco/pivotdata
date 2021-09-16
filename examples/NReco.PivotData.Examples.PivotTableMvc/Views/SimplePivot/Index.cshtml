@@ -1,4 +1,4 @@
-﻿@model System.Collections.IDictionary
+﻿@model NReco.PivotData.Examples.PivotTableMvc.PivotTableContext
 	
 	<!-- simple pivot table styling -->
 	<style>
@@ -18,13 +18,10 @@
 	<div class="row">
 		<div class="col-md-6">
 			<h3>Simple Pivot Table</h3>
-
-			@{Html.RenderAction("PivotTable", "SimplePivot");}
-
+			@await Html.PartialAsync("PivotTable", Model.PivotTableData)
 		</div>
 		<div class="col-md-6">
 			<h3>Google Charts</h3>
-
-			@{Html.RenderAction("GoogleChart", "SimplePivot");}
+			@await Html.PartialAsync("GoogleChart", Model.CubeData)
 		</div>
 	</div>	

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.IO;
 
@@ -21,27 +21,33 @@ namespace NReco.PivotData.Examples.CsvDemo {
 
 			Console.Write("CsvDemo: illustrates how to use CSV file as input for PivotData and use several aggregators at once\nInput data: TechCrunch funds raised facts\n\n");
 
-			var csvConfig = new CsvConfiguration() {
+			var csvConfig = new CsvConfiguration(CultureInfo.InvariantCulture) {
 				Delimiter = ",",
-				HasHeaderRecord = true
 			};
 			var file = "TechCrunchcontinentalUSA.csv";
 			using (var fileReader =  new StreamReader(file)) {
 				var csvReader = new CsvReader(fileReader, csvConfig );
 
-				var fldToIdx = new Dictionary<string,int>();
+				var fldToIdx = new Dictionary<string, int>();
+				csvReader.Read();
+				csvReader.ReadHeader();
+				if (csvReader.HeaderRecord != null && fldToIdx.Count == 0)
+					for (int i = 0; i < csvReader.HeaderRecord.Length; i++) {
+						fldToIdx[csvReader.HeaderRecord[i]] = i;
+						//Console.WriteLine("Column #{0}: {1}", i, csvReader.FieldHeaders[i]);
+					}
 				
 				// accessor for field values
 				Func<object,string,object> getValue = (r, f) => {
 					if (f == "fundedDate-year") {
-						var foundedDate = ((string[])r)[ fldToIdx["fundedDate"] ];
+						var foundedDate = ((CsvReader)r)[ fldToIdx["fundedDate"] ];
 						DateTime dt;
 						if (DateTime.TryParse(foundedDate, out dt))
 							return dt.Year;
 						else
 							return null;
 					}
-					var csvColVal = ((string[])r)[fldToIdx[f]];
+					var csvColVal = ((CsvReader)r)[fldToIdx[f]];
 					if (f == "raisedAmt")
 						return Decimal.Parse(csvColVal);
 					return csvColVal; // just return csv value
@@ -58,7 +64,7 @@ namespace NReco.PivotData.Examples.CsvDemo {
 						true  // lazy totals
 					);
 				// calculate in-memory cube
-				pivotData.ProcessData( readCsvRows(csvReader, fldToIdx), getValue );
+				pivotData.ProcessData( readCsvRows(csvReader), getValue );
 
 				// lets show total raised by round
 				Console.WriteLine("Total raised $$ by round:");
@@ -87,15 +93,9 @@ namespace NReco.PivotData.Examples.CsvDemo {
 			return d/(1000000);
 		}
 
-		static IEnumerable readCsvRows(ICsvReader csvReader, IDictionary<string,int> fldToIdx) {
+		static IEnumerable readCsvRows(CsvReader csvReader) {
 			while (csvReader.Read()) {
-				if (csvReader.FieldHeaders!=null && fldToIdx.Count==0)
-					for (int i = 0; i < csvReader.FieldHeaders.Length; i++) { 
-						fldToIdx[ csvReader.FieldHeaders[i] ] = i;
-						//Console.WriteLine("Column #{0}: {1}", i, csvReader.FieldHeaders[i]);
-					}
-
-				yield return csvReader.CurrentRecord;
+				yield return csvReader;
 			}
 		}
 
