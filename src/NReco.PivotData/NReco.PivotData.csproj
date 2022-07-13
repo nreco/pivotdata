@@ -11,7 +11,6 @@
     <AssemblyName>NReco.PivotData</AssemblyName>
     <AssemblyOriginatorKeyFile>NReco.PivotData.snk</AssemblyOriginatorKeyFile>
     <SignAssembly>false</SignAssembly>
-    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <PackageId>NReco.PivotData</PackageId>
     <PackageTags>Pivot;Table;PivotTable;Pivot-Table;OLAP;Cube;Crosstab;Matrix;Multidimensional;Slice;Dice;Aggregation;dynamic-grouping;netcore;net45</PackageTags>
     <PackageIconUrl>https://www.nrecosite.com/img/nreco-logo-200.png</PackageIconUrl>
