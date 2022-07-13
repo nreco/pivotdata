@@ -1,5 +1,5 @@
 ﻿/*
- *  Copyright 2015-2020 Vitaliy Fedorchenko (nrecosite.com)
+ *  Copyright 2015-2022 Vitaliy Fedorchenko (nrecosite.com)
  *
  *  Licensed under PivotData Source Code Licence (see LICENSE file).
  *
@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NReco.PivotData {
 	
@@ -133,7 +135,7 @@ namespace NReco.PivotData {
 		public IAggregator this[params object[] dimKeys] {
 			get {
 				if (dimKeys.Length!=Dimensions.Length)
-					throw new ArgumentException("Specified keys doesn't match PivotData dimensions");
+					throw new ArgumentException("Specified keys don't match this PivotData dimensions");
 				IAggregator aggr;
 				if (values.TryGetValue(dimKeys, out aggr) || totalValues.TryGetValue(dimKeys, out aggr)) {
 					return aggr;
@@ -495,6 +497,25 @@ namespace NReco.PivotData {
 			ProcessData(GetDataReaderEnumeration(dataReader), GetDataRecordValue);
 		}
 
+#if NET_STANDARD21
+		/// <summary>
+		/// Processes data a from the specified <see cref="System.Data.Common.DbDataReader"/> asynchronously.
+		/// </summary>
+		/// <param name="dbDataReader">data reader instance</param>
+		public Task ProcessDataAsync(System.Data.Common.DbDataReader dbDataReader, CancellationToken cancellationToken = default(CancellationToken)) {
+			return ProcessDataAsync(
+				GetDataReaderEnumerationAsync(dbDataReader, cancellationToken), 
+				GetDataRecordValue, cancellationToken);
+		}
+
+		static async IAsyncEnumerable<object> GetDataReaderEnumerationAsync(System.Data.Common.DbDataReader dbDataReader, CancellationToken cancellationToken) {
+			while (await dbDataReader.ReadAsync(cancellationToken)) {
+				yield return dbDataReader;
+			}
+		}
+
+#endif
+
 		/// <summary>
 		/// Processes data from the specified <see cref="IPivotData"/> instance and calculates <see cref="PivotData"/> values
 		/// </summary>
@@ -531,48 +552,34 @@ namespace NReco.PivotData {
 		/// When LazyTotals=False and <see cref="PivotData.ProcessData"/> is called for the first time 
 		/// all dimension totals are calculated for a whole batch. For all next calls totals are updated incrementally.
 		/// </remarks>
-		public virtual void ProcessData(IEnumerable data, Func<object,string,object> getValue) {
-			IAggregator aggr;
-			Action<object[],Func<object,string,object>,object> calcTotals;
-			var incTotalsMode = values.Count>0;
-			var notLazyTotals = !lazyTotals;
-			
-			if (lazyTotals && totalValues.Count>0)
-				totalValues.Clear(); // clear cached totals calculation
-			valuesArr = null; // flush values array cache
-
-			switch (dimensions.Length) {
-				case 1: calcTotals = CalcTotals1D; break;
-				case 2: calcTotals = CalcTotals2D; break;
-				default: calcTotals = CalcTotalsAny; break;
-			}
-
-			var valKey = new object[dimensions.Length];
+		public virtual void ProcessData(IEnumerable data, Func<object, string, object> getValue) {
+			var processor = new DataProcessor(this, getValue);
+			processor.Init();
 			foreach (var r in data) {
-				var valKeyUsed = false;
-				// compose key
-				for (int d = 0; d < valKey.Length; d++) { 
-					valKey[d] = getValue(r, dimensions[d]) ?? DBNull.Value;
-				}
-
-				if (!values.TryGetValue(valKey, out aggr)) {
-					aggr = aggregatorFactory.Create();
-					values[valKey] = aggr;
-					// ref to valKey is saved inside values, lets create new array
-					valKeyUsed = true;
-				}
-				aggr.Push(r, getValue);
-
-				if (incTotalsMode && notLazyTotals)
-					calcTotals(valKey, getValue, r);
-
-				if (valKeyUsed)
-					valKey = new object[dimensions.Length];
+				processor.ProcessEntry(r);
 			}
-			if (!incTotalsMode && notLazyTotals) {
-				BatchCalcTotals();
-			}
+			processor.Finish();
 		}
+
+#if NET_STANDARD21
+		/// <summary>
+		/// Processes data from asynchronous enumerable data.
+		/// </summary>
+		/// <param name="data"><see cref="IAsyncEnumerable"/> asynchronous data stream</param>
+		/// <param name="getValue">accessor used for getting field values from iterated objects</param>
+		/// <remarks>
+		/// When LazyTotals=False and <see cref="PivotData.ProcessDataAsync"/> is called for the first time 
+		/// all dimension totals are calculated for a whole batch. For all next calls totals are updated incrementally.
+		/// </remarks>
+		public async Task ProcessDataAsync(IAsyncEnumerable<object> data, Func<object, string, object> getValue, CancellationToken cancellationToken = default(CancellationToken)) {
+			var processor = new DataProcessor(this, getValue);
+			processor.Init();
+			await foreach (var r in data.WithCancellation(cancellationToken).ConfigureAwait(false)) {
+				processor.ProcessEntry(r);
+			}
+			processor.Finish();
+		}	
+#endif
 
 		/// <summary>
 		/// Modifies the current <see cref="PivotData"/> object to merge values from itself and specified <see cref="PivotData"/>.
@@ -728,6 +735,68 @@ namespace NReco.PivotData {
 			IEnumerator IEnumerable.GetEnumerator() {
 				return this.GetEnumerator();
 			}
+		}
+
+		protected sealed class DataProcessor {
+			readonly PivotData pvtData;
+			readonly Func<object, string, object> getValue;
+			readonly string[] dimensions;
+			Action<object[], Func<object, string, object>, object> calcTotals;
+
+			bool incTotalsMode;
+			bool notLazyTotals;
+			readonly bool doCalcTotals;
+			object[] valKey;
+
+			internal DataProcessor(PivotData pvtData, Func<object, string, object> getValue) {
+				this.pvtData = pvtData;
+				this.getValue = getValue;
+				this.dimensions = pvtData.dimensions;
+				incTotalsMode = pvtData.values.Count > 0;
+				notLazyTotals = !pvtData.lazyTotals;
+				doCalcTotals = incTotalsMode && notLazyTotals;
+			}
+
+			internal void Init() {
+				if (pvtData.lazyTotals && pvtData.totalValues.Count > 0)
+					pvtData.totalValues.Clear(); // clear cached totals calculation
+				pvtData.valuesArr = null; // flush values array cache
+				switch (pvtData.dimensions.Length) {
+					case 1: calcTotals = pvtData.CalcTotals1D; break;
+					case 2: calcTotals = pvtData.CalcTotals2D; break;
+					default: calcTotals = pvtData.CalcTotalsAny; break;
+				}
+				valKey = new object[dimensions.Length];
+			}
+
+			internal void ProcessEntry(object r) {
+				var valKeyUsed = false;
+				// compose key
+				for (int d = 0; d < valKey.Length; d++) {
+					valKey[d] = getValue(r, dimensions[d]) ?? DBNull.Value;
+				}
+
+				if (!pvtData.values.TryGetValue(valKey, out var aggr)) {
+					aggr = pvtData.aggregatorFactory.Create();
+					pvtData.values[valKey] = aggr;
+					// ref to valKey is saved inside values, lets create new array
+					valKeyUsed = true;
+				}
+				aggr.Push(r, getValue);
+
+				if (doCalcTotals)
+					calcTotals(valKey, getValue, r);
+
+				if (valKeyUsed)
+					valKey = new object[dimensions.Length];
+			}
+
+			internal void Finish() {
+				if (!incTotalsMode && notLazyTotals) {
+					pvtData.BatchCalcTotals();
+				}
+			}
+
 		}
 
 	}
