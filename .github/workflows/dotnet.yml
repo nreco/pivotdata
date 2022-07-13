@@ -18,8 +18,10 @@ jobs:
       with:
         dotnet-version: 3.1.x
     - name: Restore dependencies
-      run: dotnet restore src
-    - name: Build
-      run: dotnet build src --no-restore
+      run: dotnet restore src 
+    - name: Build Lib
+      run: dotnet build src/NReco.PivotData --no-restore -property:TargetFrameworks=netstandard2.1
+    - name: Build Tests
+      run: dotnet build src/NReco.PivotData.Tests --no-restore
     - name: Test
-      run: dotnet test src --no-build --verbosity detailed
+      run: dotnet test src/NReco.PivotData.Tests --no-build --verbosity detailed
