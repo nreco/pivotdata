@@ -36,7 +36,11 @@ namespace NReco.PivotData {
 			if (stateArr==null || stateArr.Length!=2)
 				throw new InvalidOperationException("Invalid state, expected array [uint count, decimal totalSum]");
 			count = Convert.ToUInt32(stateArr[0]);
-			total = Convert.ToDecimal(stateArr[1]);
+			if (stateArr[1]!=null) {
+				total = Convert.ToDecimal(stateArr[1]);
+			} else {
+				count = 0; // if no avg value, number of rows should be zero to be consistent with "Push" logic
+			}
 		}
 
 		public void Push(object r, Func<object,string,object> getValue) {
@@ -48,7 +52,11 @@ namespace NReco.PivotData {
 		}
 
 		public object Value {
-			get { return count>0 ? total / count : 0; }
+			get {
+				if (count > 0)
+					return total / count;
+				return null;
+			}
 		}
 
 		public uint Count {
@@ -60,7 +68,8 @@ namespace NReco.PivotData {
 			if (avgAggr==null)
 				throw new ArgumentException("aggr");
 			count += avgAggr.count;
-			total += avgAggr.total;
+			if (avgAggr.count>0)
+				total += avgAggr.total;
 		}
 
 		public object GetState() {
