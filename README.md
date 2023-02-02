@@ -33,7 +33,7 @@ Official component page: [PivotData Toolkit for .NET](https://www.nrecosite.com/
 NReco.PivotData is in production use at [SeekTable.com](https://www.seektable.com/) and [PivotData microservice](https://www.nrecosite.com/pivotdata_service.aspx). NReco.PivotData is a pre-requisite for PivotData Toolkit components.
 
 ## License
-Copyright 2015-2022 Vitaliy Fedorchenko
+Copyright 2015-2023 Vitaliy Fedorchenko
 
 Distributed under the PivotData OLAP library FREE license (see src/LICENSE): NReco.PivotData can be used for free only in non-SaaS apps with one single-server production deployment.
 In all other cases commercial license is required (can be purchased [here](https://www.nrecosite.com/pivot_data_library_net.aspx)).
