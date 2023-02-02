@@ -180,5 +180,34 @@ namespace NReco.PivotData.Tests {
 			}
 		}
 
+
+		[Fact]
+		public void PivotTable_PvtDataWithTotals() {
+			var pivotDataState = new PivotDataState(2,
+				new object[] { Key.Empty, "A1", "B1", "B2" },
+				new uint[4][] {
+					new uint[2] { 1, 2 },  // (A1, B1)
+					new uint[2] { 1, 3 },  // (A1, B2)
+					new uint[2] { 1, 0 },  // (A1, Key.Empty)
+					new uint[2] { 0, 0 },  // (Key.Empty, Key.Empty)
+				},
+				new object[] { 
+					(uint)1,
+					(uint)1,
+					(uint)2,
+					(uint)2,
+				}
+			);
+
+			var pvtData = new PivotData(new[] { "A", "B" }, new CountAggregatorFactory());
+			pvtData.SetState(pivotDataState);
+			Assert.Equal(4, pvtData.Count);
+
+			var pvtTbl = new PivotTable(new[] { "A" }, new[] { "B" }, pvtData);
+			Assert.Equal(1, pvtTbl.RowKeys.Length);
+			Assert.Equal(2, pvtTbl.ColumnKeys.Length);
+		}
+
+
 	}
 }

@@ -147,21 +147,31 @@ namespace NReco.PivotData {
 			object[] colKeyVals = new object[ColumnIndexes.Length];
 			ValueKey colKey = new ValueKey(colKeyVals);
 
+			var emtpyValue = Key.Empty;
+
 			foreach (var val in PvtData) {
 				if (rowKeySet != null) {
+					var rowKeyHasEmpty = false;
 					for (int i = 0; i < rowKeyVals.Length; i++) {
-						rowKeyVals[i] = val.Key[RowIndexes[i]];
+						var dimValue = val.Key[RowIndexes[i]];
+						rowKeyVals[i] = dimValue;
+						if (emtpyValue == dimValue)
+							rowKeyHasEmpty = true;
 					}
-					if (rowKeySet.Add(rowKey)) {
+					if (!rowKeyHasEmpty && rowKeySet.Add(rowKey)) {
 						rowKeyVals = new object[RowIndexes.Length];
 						rowKey = new ValueKey(rowKeyVals);
 					}
 				}
 				if (colKeySet != null) {
+					var colKeyHasEmpty = false;
 					for (int i = 0; i < colKeyVals.Length; i++) {
-						colKeyVals[i] = val.Key[ColumnIndexes[i]];
+						var dimValue = val.Key[ColumnIndexes[i]];
+						colKeyVals[i] = dimValue;
+						if (emtpyValue == dimValue)
+							colKeyHasEmpty = true;
 					}
-					if (colKeySet.Add(colKey)) {
+					if (!colKeyHasEmpty && colKeySet.Add(colKey)) {
 						colKeyVals = new object[ColumnIndexes.Length];
 						colKey = new ValueKey(colKeyVals);
 					}
