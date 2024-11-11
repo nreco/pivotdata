@@ -18,10 +18,14 @@ namespace NReco.PivotData {
 	
 	public class ConvertHelper {
 
+		/// <summary>
+		/// Converts specified object to Decimal value if possible. Otherwise, returns a default value.
+		/// </summary>
+		/// <remarks>All simple number types are converted via implicit cast, strings are parsed, objects are converted if they implement <see cref="IConvertible"/>.</remarks>
 		public static decimal ConvertToDecimal(object o, decimal defaultVal) {
-			if (o != null) { 
+			if (o != null) {
 				var type = o.GetType();
-				switch (Type.GetTypeCode( Nullable.GetUnderlyingType(type) ?? type )) {
+				switch (Type.GetTypeCode(Nullable.GetUnderlyingType(type) ?? type)) {
 					case TypeCode.Byte:
 						return (byte)o;
 					case TypeCode.SByte:
@@ -41,24 +45,39 @@ namespace NReco.PivotData {
 					case TypeCode.Decimal:
 						return (decimal)o;
 					case TypeCode.Single:
-						return (decimal) ((float)o);
+						return (decimal)((float)o);
 					case TypeCode.Double:
-						return (decimal) ((double)o);
-					case TypeCode.String: { 
+						return (decimal)((double)o);
+					case TypeCode.String: {
 							decimal d;
-							if (Decimal.TryParse((string)o, NumberStyles.Any, CultureInfo.InvariantCulture, out d))
+							if (Decimal.TryParse((string)o, NumberStyles.Any, CultureInfo.InvariantCulture, out d)) {
 								return d;
 							}
 							return defaultVal;
 						}
+					case TypeCode.Object: {
+							if (o is IConvertible iConv)
+								try {
+									return iConv.ToDecimal(CultureInfo.InvariantCulture);
+								} catch {
+									return defaultVal;
+								}
+						}
+						break;
+
+				}
 			}
 			return defaultVal;
 		}
 
+		/// <summary>
+		/// Converts specified object to Double value if possible. Otherwise, returns a default value.
+		/// </summary>
+		/// <remarks>All simple number types are converted via implicit cast, strings are parsed, objects are converted if they implement <see cref="IConvertible"/>.</remarks>
 		public static double ConvertToDouble(object o, double defaultVal) {
-			if (o != null) { 
+			if (o != null) {
 				var type = o.GetType();
-				switch (Type.GetTypeCode( Nullable.GetUnderlyingType(type) ?? type )) {
+				switch (Type.GetTypeCode(Nullable.GetUnderlyingType(type) ?? type)) {
 					case TypeCode.Byte:
 						return (byte)o;
 					case TypeCode.SByte:
@@ -76,18 +95,28 @@ namespace NReco.PivotData {
 					case TypeCode.Int64:
 						return (long)o;
 					case TypeCode.Decimal:
-						return (double) ((decimal)o);
+						return (double)((decimal)o);
 					case TypeCode.Single:
 						return (float)o;
 					case TypeCode.Double:
 						return (double)o;
-					case TypeCode.String: { 
+					case TypeCode.String: {
 							double d;
-							if (Double.TryParse((string)o, NumberStyles.Any, CultureInfo.InvariantCulture, out d))
+							if (Double.TryParse((string)o, NumberStyles.Any, CultureInfo.InvariantCulture, out d)) {
 								return d;
 							}
 							return defaultVal;
 						}
+					case TypeCode.Object: {
+							if (o is IConvertible iConv)
+								try {
+									return iConv.ToDouble(CultureInfo.InvariantCulture);
+								} catch {
+									return defaultVal;
+								}
+						}
+						break;
+				}
 			}
 			return defaultVal;
 		}
