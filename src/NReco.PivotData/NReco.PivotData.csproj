@@ -1,10 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>PivotData OLAP library: in-memory multidimensional dataset for data aggregation, roll-up, slice and dice, pivot table data calculation.</Description>
-    <Copyright>Copyright (c) 2015-2023 Vitalii Fedorchenko</Copyright>
+    <Description>PivotData OLAP library: implements in-memory multidimensional dataset for data aggregations, OLAP queries (roll-ups, slice and dice, transformations), pivot table (crosstab) data model.
+	
+Source code and examples: https://github.com/nreco/pivotdata
+Usage conditions, online demo: https://www.nrecosite.com/pivot_data_library_net.aspx
+Get started: https://www.nrecosite.com/pivotdata/cube-basics.aspx</Description>
+    <Copyright>Copyright (c) 2015-2024 Vitalii Fedorchenko</Copyright>
     <AssemblyTitle>NReco.PivotData</AssemblyTitle>
-    <VersionPrefix>1.4.2</VersionPrefix>
+    <VersionPrefix>1.4.3</VersionPrefix>
     <Authors>Vitalii Fedorchenko</Authors>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net45</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -18,8 +22,9 @@
     <PackageLicenseUrl>https://www.nrecosite.com/pivot_data_library_net.aspx</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/nreco/pivotdata.git</RepositoryUrl> 
     <RepositoryType>git</RepositoryType> 	
-	<PackageReleaseNotes>Online demo, usage examples: https://www.nrecosite.com/pivot_data_library_net.aspx
-Get started: https://www.nrecosite.com/pivotdata/cube-basics.aspx
+	<PackageReleaseNotes>
+v.1.4.3 changes:
+- ConvertHelper: handle IConvertible interface for non-simple aggregator values #12
 
 v.1.4.2 changes:
 - PivotTable now skips Key.Empty keys when calculates ColumnKeys/RowKeys (github issue #11)
