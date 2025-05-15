@@ -84,9 +84,9 @@ namespace NReco.PivotData.Tests {
 					return js.Deserialize<PivotDataState>( (string)state);
 				});*/
 
-			var binFmt = new BinaryFormatter();
+			/*var binFmt = new BinaryFormatter();
 			
-			/*CheckSerializerPerf(pvtData, "BinaryFormatter", 
+			CheckSerializerPerf(pvtData, "BinaryFormatter", 
 				(state) => {
 					var memStream = new MemoryStream();
 					binFmt.Serialize(memStream, state);
