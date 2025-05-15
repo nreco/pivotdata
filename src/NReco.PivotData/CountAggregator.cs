@@ -21,7 +21,7 @@ namespace NReco.PivotData {
 	/// </summary>
 	public class CountAggregator : IAggregator {
 
-		uint count = 0;
+		ulong count = 0;
 
 		public CountAggregator() {
 		}
@@ -29,7 +29,7 @@ namespace NReco.PivotData {
 		public CountAggregator(object state) {
 			if (state==null)
 				throw new InvalidOperationException("Invalid state, expected: uint");
-			count = Convert.ToUInt32(state);
+			count = Convert.ToUInt64(state);
 		}
 
 		public void Push(object r, Func<object,string,object> getValue) {
@@ -40,7 +40,7 @@ namespace NReco.PivotData {
 			get { return count; }
 		}
 
-		public uint Count {
+		public ulong Count {
 			get { return count; }
 		}
 

@@ -25,7 +25,7 @@ namespace NReco.PivotData {
 	public class SumAggregator : IAggregator {
 
 		decimal total = 0;
-		uint count = 0;
+		ulong count = 0;
 		string field;
 
 		public SumAggregator(string f) {
@@ -36,7 +36,7 @@ namespace NReco.PivotData {
 			var stateArr = state as object[];
 			if (stateArr==null || stateArr.Length!=2)
 				throw new InvalidOperationException("Invalid state, expected array [uint count, decimal value]");
-			count = Convert.ToUInt32(stateArr[0]);
+			count = Convert.ToUInt64(stateArr[0]);
 			if (stateArr[1]!=null) {
 				total = Convert.ToDecimal(stateArr[1]);
 			} else {
@@ -60,7 +60,7 @@ namespace NReco.PivotData {
 			}
 		}
 
-		public uint Count {
+		public ulong Count {
 			get { return count; }
 		}
 

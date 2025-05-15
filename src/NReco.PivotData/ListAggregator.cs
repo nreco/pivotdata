@@ -58,8 +58,8 @@ namespace NReco.PivotData {
 			get { return values; }
 		}
 
-		public uint Count {
-			get { return (uint)values.Count; }
+		public ulong Count {
+			get { return (ulong)values.Count; }
 		}
 
 		public virtual void Merge(IAggregator aggr) {

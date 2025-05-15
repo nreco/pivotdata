@@ -53,7 +53,7 @@ namespace NReco.PivotData {
 		/// <summary>
 		/// Number of facts (data records) used for calculating aggregator value
 		/// </summary>
-		uint Count { get; }
+		ulong Count { get; }
 
 		/// <summary>
 		/// Modifies current instance of aggregator by merging with specified compatible aggregator

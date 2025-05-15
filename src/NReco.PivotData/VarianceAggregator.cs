@@ -25,7 +25,7 @@ namespace NReco.PivotData {
 		string field;
 		VarianceAggregatorValueType valType;
 
-		uint count = 0;
+		ulong count = 0;
 		double mean = 0;
 		double M2 = 0;
 
@@ -38,7 +38,7 @@ namespace NReco.PivotData {
 			var stateArr = state as object[];
 			if (stateArr==null || stateArr.Length!=3)
 				throw new InvalidOperationException("Invalid state, expected array [uint count, double mean, double M2] where M2=variance*count");
-			count = Convert.ToUInt32(stateArr[0]);
+			count = Convert.ToUInt64(stateArr[0]);
 			mean = Convert.ToDouble(stateArr[1]);
 			M2 = Convert.ToDouble(stateArr[2]);
 		}
@@ -69,7 +69,7 @@ namespace NReco.PivotData {
 			}
 		}
 
-		public uint Count {
+		public ulong Count {
 			get { return count; }
 		}
 

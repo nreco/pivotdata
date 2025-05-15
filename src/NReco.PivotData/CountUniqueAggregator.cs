@@ -23,7 +23,7 @@ namespace NReco.PivotData {
 	/// </remarks>
 	public class CountUniqueAggregator : IAggregator {
 
-		uint count = 0;
+		ulong count = 0;
 		string field;
 		protected HashSet<object> uniqueValues;
 
@@ -36,7 +36,7 @@ namespace NReco.PivotData {
 			var stateArr = state as object[];
 			if (stateArr==null || stateArr.Length!=2)
 				throw new InvalidOperationException("Invalid state, expected 2-elements array like [uint count, [object val1, object val2, ... ] ]");
-			count = Convert.ToUInt32(stateArr[0]);
+			count = Convert.ToUInt64(stateArr[0]);
 			var unqValsArr = stateArr[1] as object[];
 			for (int i=0; i<unqValsArr.Length; i++)
 				uniqueValues.Add(unqValsArr[i]);
@@ -54,7 +54,7 @@ namespace NReco.PivotData {
 			get { return uniqueValues.Count; }
 		}
 
-		public uint Count {
+		public ulong Count {
 			get { return count; }
 		}
 

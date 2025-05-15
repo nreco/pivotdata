@@ -288,7 +288,7 @@ namespace NReco.PivotData.Tests {
 			var slice2Data = pvtData.Slice(new string[] {"name", "qty"}, false, (v) => {
 				return v.Key.DimKeys[0].Equals("Test0");
 			});
-			Assert.Equal( ((uint)pvtData[Key.Empty, Key.Empty, Key.Empty, Key.Empty].Value)/2, slice2Data[Key.Empty,Key.Empty].Value );
+			Assert.Equal( ((ulong)pvtData[Key.Empty, Key.Empty, Key.Empty, Key.Empty].Value)/2, slice2Data[Key.Empty,Key.Empty].Value );
 
 			// check zero-dim slice
 			var sliceZeroDimData = slice2Data.Slice(null, false);

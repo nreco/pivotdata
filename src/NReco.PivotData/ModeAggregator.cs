@@ -20,7 +20,7 @@ namespace NReco.PivotData {
 	/// </summary>
 	public class ModeAggregator : IAggregator {
 
-		uint count = 0;
+		ulong count = 0;
 		string field;
 		bool multimodal;
 		protected Dictionary<object,uint> uniqueValueCounts;
@@ -36,7 +36,7 @@ namespace NReco.PivotData {
 			var stateArr = state as object[];
 			if (stateArr == null || stateArr.Length != 3)
 				throw new InvalidOperationException("Invalid state, expected 3-elements array like [uint count, [object val1, object val2, ... ], [uint val1_count, uint val2_count, ... ]");
-			count = Convert.ToUInt32(stateArr[0]);
+			count = Convert.ToUInt64(stateArr[0]);
 			var unqValsArr = stateArr[1] as object[];
 			var unqValCountsArr = stateArr[2] as uint[];
 			if (unqValsArr.Length != unqValCountsArr.Length)
@@ -96,7 +96,7 @@ namespace NReco.PivotData {
 			}
 		}
 
-		public uint Count {
+		public ulong Count {
 			get { return count; }
 		}
 

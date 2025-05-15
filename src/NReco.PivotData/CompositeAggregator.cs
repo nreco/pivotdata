@@ -27,7 +27,7 @@ namespace NReco.PivotData {
 			}
 		}
 		IAggregator[] _Aggregators;
-		uint count = 0;
+		ulong count = 0;
 
 		public CompositeAggregator(IAggregator[] aggregators) {
 			_Aggregators = aggregators;
@@ -46,7 +46,7 @@ namespace NReco.PivotData {
 			for (var i = 0; i < factories.Length; i++) {
 				_Aggregators[i] = factories[i].Create(stateArr[i]);
 			}
-			count = Convert.ToUInt32(stateArr[factories.Length]);
+			count = Convert.ToUInt64(stateArr[factories.Length]);
 		}
 
 		public virtual void Push(object r, Func<object,string,object> getValue) {
@@ -64,7 +64,7 @@ namespace NReco.PivotData {
 			}
 		}
 
-		public uint Count {
+		public ulong Count {
 			get { return count; }
 		}
 
