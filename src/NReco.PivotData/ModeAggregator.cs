@@ -35,7 +35,7 @@ namespace NReco.PivotData {
 		public ModeAggregator(string f, bool multimodal, object state) : this(f, multimodal) {
 			var stateArr = state as object[];
 			if (stateArr == null || stateArr.Length != 3)
-				throw new InvalidOperationException("Invalid state, expected 3-elements array like [uint count, [object val1, object val2, ... ], [uint val1_count, uint val2_count, ... ]");
+				throw new InvalidOperationException("Invalid state, expected 3-elements array like [UInt64 count, [object val1, object val2, ... ], [uint val1_count, uint val2_count, ... ]");
 			count = Convert.ToUInt64(stateArr[0]);
 			var unqValsArr = stateArr[1] as object[];
 			var unqValCountsArr = stateArr[2] as uint[];

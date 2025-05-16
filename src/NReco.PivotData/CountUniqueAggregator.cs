@@ -35,7 +35,7 @@ namespace NReco.PivotData {
 		public CountUniqueAggregator(string f, object state) : this(f) {
 			var stateArr = state as object[];
 			if (stateArr==null || stateArr.Length!=2)
-				throw new InvalidOperationException("Invalid state, expected 2-elements array like [uint count, [object val1, object val2, ... ] ]");
+				throw new InvalidOperationException("Invalid state, expected 2-elements array like [UInt64 count, [object val1, object val2, ... ] ]");
 			count = Convert.ToUInt64(stateArr[0]);
 			var unqValsArr = stateArr[1] as object[];
 			for (int i=0; i<unqValsArr.Length; i++)

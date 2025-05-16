@@ -34,7 +34,7 @@ namespace NReco.PivotData {
 		public AverageAggregator(string f, object state) : this(f) {
 			var stateArr = state as object[];
 			if (stateArr==null || stateArr.Length!=2)
-				throw new InvalidOperationException("Invalid state, expected array [uint count, decimal totalSum]");
+				throw new InvalidOperationException("Invalid state, expected array [UInt64 count, decimal totalSum]");
 			count = Convert.ToUInt64(stateArr[0]);
 			if (stateArr[1]!=null) {
 				total = Convert.ToDecimal(stateArr[1]);

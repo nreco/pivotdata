@@ -37,7 +37,7 @@ namespace NReco.PivotData {
 		public VarianceAggregator(string f, VarianceAggregatorValueType aggrValueType, object state) : this(f, aggrValueType) {
 			var stateArr = state as object[];
 			if (stateArr==null || stateArr.Length!=3)
-				throw new InvalidOperationException("Invalid state, expected array [uint count, double mean, double M2] where M2=variance*count");
+				throw new InvalidOperationException("Invalid state, expected array [UInt64 count, double mean, double M2] where M2=variance*count");
 			count = Convert.ToUInt64(stateArr[0]);
 			mean = Convert.ToDouble(stateArr[1]);
 			M2 = Convert.ToDouble(stateArr[2]);

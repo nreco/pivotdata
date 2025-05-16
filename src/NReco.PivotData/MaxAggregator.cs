@@ -34,7 +34,7 @@ namespace NReco.PivotData {
 		public MaxAggregator(string f, object state) : this(f) {
 			var stateArr = state as object[];
 			if (stateArr==null || stateArr.Length!=2)
-				throw new InvalidOperationException("Invalid state, expected array [uint count, IComparable value]");
+				throw new InvalidOperationException("Invalid state, expected array [UInt64 count, IComparable value]");
 			count = Convert.ToUInt64(stateArr[0]);
 			maxValue = (IComparable)stateArr[1];
 		}
