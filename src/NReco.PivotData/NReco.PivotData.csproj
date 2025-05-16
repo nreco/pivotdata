@@ -5,10 +5,11 @@
 	
 Source code and examples: https://github.com/nreco/pivotdata
 Usage conditions, online demo: https://www.nrecosite.com/pivot_data_library_net.aspx
-Get started: https://www.nrecosite.com/pivotdata/cube-basics.aspx</Description>
-    <Copyright>Copyright (c) 2015-2024 Vitalii Fedorchenko</Copyright>
+Get started: https://www.nrecosite.com/pivotdata/cube-basics.aspx
+	</Description>
+    <Copyright>Copyright (c) 2015-2025 Vitalii Fedorchenko</Copyright>
     <AssemblyTitle>NReco.PivotData</AssemblyTitle>
-    <VersionPrefix>1.4.3</VersionPrefix>
+    <VersionPrefix>1.5.0</VersionPrefix>
     <Authors>Vitalii Fedorchenko</Authors>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net45</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -23,9 +24,13 @@ Get started: https://www.nrecosite.com/pivotdata/cube-basics.aspx</Description>
     <RepositoryUrl>https://github.com/nreco/pivotdata.git</RepositoryUrl> 
     <RepositoryType>git</RepositoryType> 	
 	<PackageReleaseNotes>
+v.1.5.0 changes:
+- [Breaking] IAggregator.Count should be UInt64 #13
+- CountAggregator: now field value can be specified to count number of non-null values of the concrete field #14
+	
 v.1.4.3 changes:
 - ConvertHelper: handle IConvertible interface for non-simple aggregator values #12
-
+	
 v.1.4.2 changes:
 - PivotTable now skips Key.Empty keys when calculates ColumnKeys/RowKeys (github issue #11)
 
