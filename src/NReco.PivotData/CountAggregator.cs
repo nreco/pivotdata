@@ -22,17 +22,32 @@ namespace NReco.PivotData {
 	public class CountAggregator : IAggregator {
 
 		ulong count = 0;
+		string field = null;
 
 		public CountAggregator() {
 		}
 
+		public CountAggregator(string field) {
+			this.field = field;
+		}
+
 		public CountAggregator(object state) {
 			if (state==null)
-				throw new InvalidOperationException("Invalid state, expected: uint");
+				throw new InvalidOperationException("Invalid state, expected: UInt64");
 			count = Convert.ToUInt64(state);
 		}
 
+		public CountAggregator(string field, object state) : this(state) {
+			this.field = field;
+		}
+
+
 		public void Push(object r, Func<object,string,object> getValue) {
+			if (field!=null) {
+				var v = getValue(r, field);
+				if (v == null || DBNull.Value.Equals(v))
+					return;
+			}
 			count++;
 		}
 
@@ -61,26 +76,36 @@ namespace NReco.PivotData {
 	/// </summary>
 	public class CountAggregatorFactory : IAggregatorFactory {
 
+		public string Field { get; private set; }
+
 		public CountAggregatorFactory() {
+			Field = null;
+		}
+
+		public CountAggregatorFactory(string field) {
+			Field = field;
 		}
 
 		public IAggregator Create() {
-			return new CountAggregator();
+			return new CountAggregator(Field);
 		}
 
 		public IAggregator Create(object state) {
-			return new CountAggregator(state);
+			return new CountAggregator(Field, state);
 		}
 
 		public override bool Equals(object obj) {
 			var aggrFactory = obj as CountAggregatorFactory;
 			if (aggrFactory==null)
 				return false;
-			return true;
+			return aggrFactory.Field==Field;
 		}
 
 		public override string ToString() {
-			return "Count";
+			var s = "Count";
+			if (Field!=null)
+				s += " of "+Field;
+			return s;
 		}
 
 	}
