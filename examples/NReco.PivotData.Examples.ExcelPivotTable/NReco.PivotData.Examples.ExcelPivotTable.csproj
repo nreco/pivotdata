@@ -2,12 +2,12 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NReco.PivotData" Version="1.3.8" />    
-    <PackageReference Include="EPPlus" Version="4.5.3" />	
+    <PackageReference Include="NReco.PivotData" Version="1.5.0" />
+    <PackageReference Include="EPPlus" Version="4.5.3.3" />	
   </ItemGroup>
 
   
