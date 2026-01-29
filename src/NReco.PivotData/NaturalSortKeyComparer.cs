@@ -9,6 +9,7 @@
  */
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace NReco.PivotData {
 	/// <summary>
 	/// Implements lexicographical comparison for any 2 objects (A-Z or Z-A).
 	/// </summary>
-	public class NaturalSortKeyComparer : IComparer<object>, IComparer<ValueKey> {
+	public class NaturalSortKeyComparer : IComparer<object>, IComparer<ValueKey>, IComparer {
 
 		/// <summary>
 		/// Represents an instance of <see cref="NaturalSortKeyComparer"/> for lexicographical comparison (A-Z).

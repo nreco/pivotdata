@@ -228,8 +228,8 @@ namespace NReco.PivotData {
 			if (len<=1)
 				return;
 			var comparer = ValuesComparer;
-			if (comparer == null && ListValuesComparer.HasListValue(values))
-				comparer = new ListValuesComparer();
+			if (ListValuesComparer.HasListValue(values))
+				comparer = new ListValuesComparer(comparer);
 			Array.Sort(values, keys, start, len, comparer );
 			if (reverse)
 				Array.Reverse(keys, start, len);
@@ -249,8 +249,8 @@ namespace NReco.PivotData {
 				ArraySortRange(values, keys, startIdx, values.Length-startIdx, sortDirection==ListSortDirection.Descending);
 			} else {
 				var comparer = ValuesComparer;
-				if (comparer == null && ListValuesComparer.HasListValue(values))
-					comparer = new ListValuesComparer();
+				if (ListValuesComparer.HasListValue(values))
+					comparer = new ListValuesComparer(comparer);
 				Array.Sort(values, keys, comparer);
 				if (sortDirection==ListSortDirection.Descending)
 					Array.Reverse(keys);
@@ -385,8 +385,8 @@ namespace NReco.PivotData {
 		internal class ListValuesComparer : IComparer {
 			IComparer DefaultComparer;
 
-			internal ListValuesComparer() {
-				DefaultComparer = Comparer.Default;
+			internal ListValuesComparer(IComparer comparer) {
+				DefaultComparer = comparer ?? Comparer.Default;
 			}
 
 			public int Compare(object x, object y) {
