@@ -7,9 +7,9 @@ Source code and examples: https://github.com/nreco/pivotdata
 Usage conditions, online demo: https://www.nrecosite.com/pivot_data_library_net.aspx
 Get started: https://www.nrecosite.com/pivotdata/cube-basics.aspx
 	</Description>
-    <Copyright>Copyright (c) 2015-2025 Vitalii Fedorchenko</Copyright>
+    <Copyright>Copyright (c) 2015-2026 Vitalii Fedorchenko</Copyright>
     <AssemblyTitle>NReco.PivotData</AssemblyTitle>
-    <VersionPrefix>1.5.0</VersionPrefix>
+    <VersionPrefix>1.5.1</VersionPrefix>
     <Authors>Vitalii Fedorchenko</Authors>
     <TargetFrameworks>netstandard2.1;netstandard2.0;net45</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -19,11 +19,15 @@ Get started: https://www.nrecosite.com/pivotdata/cube-basics.aspx
     <PackageId>NReco.PivotData</PackageId>
     <PackageTags>Pivot;Table;PivotTable;Pivot-Table;OLAP;Cube;Crosstab;Matrix;Multidimensional;Slice;Dice;Aggregation;dynamic-grouping;netcore;net45</PackageTags>
     <PackageIconUrl>https://www.nrecosite.com/img/nreco-logo-200.png</PackageIconUrl>
-    <PackageProjectUrl>https://www.nrecosite.com/pivot_data_library_net.aspx</PackageProjectUrl>
-    <PackageLicenseUrl>https://www.nrecosite.com/pivot_data_library_net.aspx</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/nreco/pivotdata</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/nreco/pivotdata/blob/master/src/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/nreco/pivotdata.git</RepositoryUrl> 
     <RepositoryType>git</RepositoryType> 	
 	<PackageReleaseNotes>
+v.1.5.1 changes:
+- NaturalSortKeyComparer now implements non-generic IComparer
+- PivotTable: when custom ValuesComparer is used, apply the same logic for comparing lists	
+	
 v.1.5.0 changes:
 - [Breaking] IAggregator.Count should be UInt64 #13
 - CountAggregator: now field value can be specified to count number of non-null values of the concrete field #14
