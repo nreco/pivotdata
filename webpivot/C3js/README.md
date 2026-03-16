@@ -7,6 +7,6 @@ How to use:
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/c3/0.6.0/c3.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/c3/0.6.0/c3.min.css">
-<script type="text/javascript" src="https://cdn.rawgit.com/nreco/pivotdata/master/webpivot/C3js/jquery.nrecopivotchart-c3.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/nreco/pivotdata/webpivot/C3js/jquery.nrecopivotchart-c3.js"></script>
 ```
 Online demo: [PivotData microservice with C3.js](http://pivotdataservice.nrecosite.com/pivotdataservice/?chartlib=C3js)
